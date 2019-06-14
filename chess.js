@@ -42,31 +42,34 @@ var turn = 0;
 function determine_square(event){
   // the x and y coordinates of the upper left corner of the square that was
   // clicked
-  var x = event.pageX - (event.pageX % sideLength)
-  var y = event.pageY - (event.pageY % sideLength)
+  var x = event.pageX - buffer;
+  var y = event.pageY - buffer;
 
-  console.log(x);
-  console.log(y);
+  console.log([x, y]);
 
   // this will be returned the indices into a list of lists
   var result = [];
 
   // get the index of the row in which the square exists
   var index;
-  for (index = 8; (y % sideLength * index) != 0; index--);
+  for (index = 8; (y % (sideLength * index)) != 0 && index < 0; index--);
 
-  result += (index - 1);
+  result.push(index - 1);
 
   // get the index of the column in which the square exists
-  for (index = 8; (x % sideLength * index) != 0; index--);
+  for (index = 8; (x % (sideLength * index)) != 0  && index < 0; index--);
 
-  return result + (index - 1);
+  result.push(index - 1);
+  return result;
 }
 
 // perform some action depending on which square was clicked
 function canvas_events(event){
   var clicked = determine_square(event);
+
   console.log(clicked);
+
+  // this is all test code right now
   clicked = squares[clicked[0]][clicked[1]];
   clicked.drawSquare(clicked.x, clicked.y, "#FF0000");
 }
@@ -125,8 +128,6 @@ function makeBoard(){
   for (var y = buffer; y < (boardLength - buffer); y += sideLength){
     squares.push(makeRow(x, y));
   }
-
-  console.log(squares);
 }
 
 // -----------------------------------------------------------------------------
@@ -157,5 +158,3 @@ makeBoard();
 board.addEventListener('click', function(event) {
   canvas_events(event);
   }, false);
-
-console.log("made board...again");
