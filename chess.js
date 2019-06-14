@@ -47,19 +47,19 @@ function determine_square(event){
 
   console.log([x, y]);
 
-  // this will be returned the indices into a list of lists
+  // the indices into a list of lists
   var result = [];
 
   // get the index of the row in which the square exists
-  var index;
-  for (index = 8; (y % (sideLength * index)) != 0 && index < 0; index--);
+  var i;
+  for (i = 1; y > (sideLength * i); i++);
 
-  result.push(index - 1);
+  result.push(i - 1);
 
   // get the index of the column in which the square exists
-  for (index = 8; (x % (sideLength * index)) != 0  && index < 0; index--);
+  for (i = 1; x > (sideLength * i); i++);
 
-  result.push(index - 1);
+  result.push(i - 1);
   return result;
 }
 
