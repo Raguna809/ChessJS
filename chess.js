@@ -45,8 +45,6 @@ function determine_square(event){
   var x = event.pageX - buffer;
   var y = event.pageY - buffer;
 
-  console.log([x, y]);
-
   // the indices into a list of lists
   var result = [];
 
@@ -67,11 +65,9 @@ function determine_square(event){
 function canvas_events(event){
   var clicked = determine_square(event);
 
-  console.log(clicked);
-
   // this is all test code right now
   clicked = squares[clicked[0]][clicked[1]];
-  clicked.drawSquare(clicked.x, clicked.y, "#FF0000");
+  clicked.drawSquare("#FF0000");
 }
 
 // -----------------------------------------------------------------------------
@@ -87,9 +83,9 @@ class Space {
     this.piece = null; // this will be updated once a piece is placed
   }
 
-  drawSquare(x, y, color){
+  drawSquare(color){
     ctx.beginPath();
-    ctx.rect(x, y, sideLength, sideLength);
+    ctx.rect(this.x, this.y, sideLength, sideLength);
     ctx.fillStyle = color;
     ctx.fill();
     ctx.closePath();
@@ -113,7 +109,7 @@ function makeRow(x, y){
   // draw 8 squares, alternating the color each time
   for (x = buffer; x < (boardLength - buffer); x += sideLength){
     row.push(new Space(x, y));
-    row[row.length - 1].drawSquare(x, y, color);
+    row[row.length - 1].drawSquare(color);
     color = (color == "#CCCCCB")? "#000022": "#CCCCCB";
   }
 
