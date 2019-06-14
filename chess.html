@@ -6,8 +6,345 @@
 </head>
 
 <body>
-  <canvas id="board" width="552" height="552" style="background: gray">
-  </canvas>
+  <!-- this is a container for all of th squares -->
+  <!-- <div class="squares">
+    <div class="r1">
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
 
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+    </div>
+
+    <div class="r2">
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+    </div>
+
+    <div class="r3">
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+    </div>
+
+    <div class="r4">
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+    </div>
+
+    <div class="r5">
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+    </div>
+
+    <div class="r6">
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+    </div>
+
+    <div class="r7">
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+    </div>
+
+    <div class="r8">
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="bs" width="64" height="64"
+              style="fill:rgb(5,5,45)" />
+      </svg>
+
+      <svg width=64 height=64 style="padding: 0px">
+        <rect class="ws" width="64" height="64"
+              style="fill:rgb(204,204,203);" />
+      </svg>
+    </div>
+  </div> -->
+
+  <canvas id="board" width="552" height="552" style="background: gray"></canvas>
   <script src="chess.js" type="text/javascript"></script>
 </body>

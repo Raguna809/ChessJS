@@ -20,26 +20,76 @@ var buffer = 20;
 // this is the length of one side of the board
 var boardLength = 552;
 
+// get the board from the HTML document
+var board = document.getElementById("board");
+
+// get the context from the HTML document
+var ctx = board.getContext("2d");
+
+// this will be a list of lists of all the squares on the board
+var squares = []
+
 // this keeps track of the number of moves to enforce
 var turn = 0;
+
+// -----------------------------------------------------------------------------
+// -------------------------- CANVAS EVENT HANDLER -----------------------------
+// -----------------------------------------------------------------------------
+
+// determine which square was clicked, returning the index of the square's
+// position in a list of lists where the outer list represents the row and the
+// inner list represents the column
+function determine_square(event){
+  // the x and y coordinates of the upper left corner of the square that was
+  // clicked
+  var x = event.pageX - (event.pageX % sideLength)
+  var y = event.pageY - (event.pageY % sideLength)
+
+  console.log(x);
+  console.log(y);
+
+  // this will be returned the indices into a list of lists
+  var result = [];
+
+  // get the index of the row in which the square exists
+  var index;
+  for (index = 8; (y % sideLength * index) != 0; index--);
+
+  result += (index - 1);
+
+  // get the index of the column in which the square exists
+  for (index = 8; (x % sideLength * index) != 0; index--);
+
+  return result + (index - 1);
+}
+
+// perform some action depending on which square was clicked
+function canvas_events(event){
+  var clicked = determine_square(event);
+  console.log(clicked);
+  clicked = squares[clicked[0]][clicked[1]];
+  clicked.drawSquare(clicked.x, clicked.y, "#FF0000");
+}
+
 // -----------------------------------------------------------------------------
 // ------------------------------- SPACE CLASS ---------------------------------
 // -----------------------------------------------------------------------------
 
-
 class Space {
-  constructor(x, y) {
+  // make the space
+  constructor(x, y){
     // the position of the space
     this.x = x;
     this.y = y;
+    this.piece = null; // this will be updated once a piece is placed
+  }
 
-    // this is true if there is no piece on the space
-    this.free = true;
-
-    // make the spaces clickable
-    this.addEventListener("click", function() {
-      (this);
-    });
+  drawSquare(x, y, color){
+    ctx.beginPath();
+    ctx.rect(x, y, sideLength, sideLength);
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.closePath();
   }
 }
 
@@ -47,22 +97,7 @@ class Space {
 // ------------------------------- MAKE BOARD ----------------------------------
 // -----------------------------------------------------------------------------
 
-// get the board from the HTML document
-var board = document.getElementById("board");
-
-// get the context from the HTML document
-var ctx = board.getContext("2d");
-
-// draw a single square on the board
-function drawSquare(x, y, color){
-  ctx.beginPath();
-  ctx.rect(x, y, sideLength, sideLength);
-  ctx.fillStyle = color;
-  ctx.fill();
-  ctx.closePath();
-}
-
-// draw a full row on the board
+// draw a full row on the board, returning a list of all the spaces
 // NOTE: Colors are given in hex value because the pieces used do not have
 //       outlines that set them apart from the background. The reason for the
 //       hex colors is to provide colors that will allow the pieces to be seen
@@ -70,11 +105,16 @@ function makeRow(x, y){
   // set color of the first square in the row
   var color = (((y - buffer) % (2 * sideLength) == 0))? "#CCCCCB": "#000022";
 
+  var row = []
+
   // draw 8 squares, alternating the color each time
   for (x = buffer; x < (boardLength - buffer); x += sideLength){
-    drawSquare(x, y, color);
+    row.push(new Space(x, y));
+    row[row.length - 1].drawSquare(x, y, color);
     color = (color == "#CCCCCB")? "#000022": "#CCCCCB";
   }
+
+  return row;
 }
 
 // get the canvas from the HTML document and make the board
@@ -83,8 +123,10 @@ function makeBoard(){
   var x = buffer;
 
   for (var y = buffer; y < (boardLength - buffer); y += sideLength){
-    makeRow(x, y);
+    squares.push(makeRow(x, y));
   }
+
+  console.log(squares);
 }
 
 // -----------------------------------------------------------------------------
@@ -111,4 +153,9 @@ function placePieces(){
 // -----------------------------------------------------------------------------
 
 makeBoard();
+
+board.addEventListener('click', function(event) {
+  canvas_events(event);
+  }, false);
+
 console.log("made board...again");
