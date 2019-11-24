@@ -27,7 +27,7 @@ var board = document.getElementById("board");
 var ctx = board.getContext("2d");
 
 // this will be a list of lists of all the squares on the board
-var squares = []
+var squares = [];
 
 // this keeps track of the number of moves to enforce
 var turn = 0;
@@ -39,7 +39,7 @@ var turn = 0;
 // determine which square was clicked, returning the index of the square's
 // position in a list of lists where the outer list represents the row and the
 // inner list represents the column
-function determine_square(event){
+function determine_square(event) {
   // the x and y coordinates of the upper left corner of the square that was
   // clicked
   var x = event.pageX - buffer;
@@ -50,19 +50,19 @@ function determine_square(event){
 
   // get the index of the row in which the square exists
   var i;
-  for (i = 1; y > (sideLength * i); i++);
+  for (i = 1; y > sideLength * i; i++);
 
   result.push(i - 1);
 
   // get the index of the column in which the square exists
-  for (i = 1; x > (sideLength * i); i++);
+  for (i = 1; x > sideLength * i; i++);
 
   result.push(i - 1);
   return result;
 }
 
 // perform some action depending on which square was clicked
-function canvas_events(event){
+function canvas_events(event) {
   var clicked = determine_square(event);
 
   // this is all test code right now
@@ -76,14 +76,14 @@ function canvas_events(event){
 
 class Space {
   // make the space
-  constructor(x, y){
+  constructor(x, y) {
     // the position of the space
     this.x = x;
     this.y = y;
     this.piece = null; // this will be updated once a piece is placed
   }
 
-  drawSquare(color){
+  drawSquare(color) {
     ctx.beginPath();
     ctx.rect(this.x, this.y, sideLength, sideLength);
     ctx.fillStyle = color;
@@ -100,28 +100,28 @@ class Space {
 // NOTE: Colors are given in hex value because the pieces used do not have
 //       outlines that set them apart from the background. The reason for the
 //       hex colors is to provide colors that will allow the pieces to be seen
-function makeRow(x, y){
+function makeRow(x, y) {
   // set color of the first square in the row
-  var color = (((y - buffer) % (2 * sideLength) == 0))? "#CCCCCB": "#000022";
+  var color = (y - buffer) % (2 * sideLength) == 0 ? "#CCCCCB" : "#000022";
 
-  var row = []
+  var row = [];
 
   // draw 8 squares, alternating the color each time
-  for (x = buffer; x < (boardLength - buffer); x += sideLength){
+  for (x = buffer; x < boardLength - buffer; x += sideLength) {
     row.push(new Space(x, y));
     row[row.length - 1].drawSquare(color);
-    color = (color == "#CCCCCB")? "#000022": "#CCCCCB";
+    color = color == "#CCCCCB" ? "#000022" : "#CCCCCB";
   }
 
   return row;
 }
 
 // get the canvas from the HTML document and make the board
-function makeBoard(){
+function makeBoard() {
   // the starting x and y coordinates of each row
   var x = buffer;
 
-  for (var y = buffer; y < (boardLength - buffer); y += sideLength){
+  for (var y = buffer; y < boardLength - buffer; y += sideLength) {
     squares.push(makeRow(x, y));
   }
 }
@@ -141,8 +141,13 @@ QUEEN   x1 --
 */
 
 // place all the pieces on the board
-function placePieces(){
-  return;
+// code blatantly copied from stackoverflow
+function placePieces() {
+  var img = document.createElement("img");
+  img.src = "http://www.google.com/intl/en_com/images/logo_plain.png";
+
+  var src = document.getElementById("header");
+  src.appendChild(img);
 }
 
 // -----------------------------------------------------------------------------
@@ -151,6 +156,6 @@ function placePieces(){
 
 makeBoard();
 
-board.addEventListener('click', function(event) {
-  canvas_events(event);
-  }, false);
+// pass the function canvas_events as a parameter which will automatically be
+// passed the event as a parameter when called
+board.addEventListener("click", canvas_events, false);
