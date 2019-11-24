@@ -89,7 +89,7 @@ class Space {
     ctx.fillStyle = color;
     ctx.fill();
     ctx.closePath();
-    placePieces();
+    placePieces(this.x, this.y, this);
   }
 }
 
@@ -142,14 +142,29 @@ QUEEN   x1 --
 */
 
 // place all the pieces on the board
-function placePieces() {
+function placePieces(x, y, space) {
+  // get the container for the image
+  var container = document.getElementById("image-container");
+
+  // make a new div for the image, oh boy this is gonna get complicated...
+  var imgDiv = document.createElement("DIV");
+  imgDiv.style.position = "absolute";
+  imgDiv.stype.top = y.toString();
+  imgDiv.style.left = x.toString();
+
+  console.log(y.toString());
+
+  // make an element for the image
   var img = document.createElement("IMG");
-  img.src = "pieces/white/whiteBishop.png";
-  img.position = "relative";
+  img.src = "pieces/white/whiteBishop.png"; // set the source
+  img.width = sideLength; // set the width
+  img.height = sideLength; // set the height
 
-  var imgDiv = document.getElementById("image-container");
-
+  // add the image to its div
   imgDiv.appendChild(img);
+
+  // add the new div to the screen
+  container.appendChild(imgDiv);
 }
 
 // -----------------------------------------------------------------------------
