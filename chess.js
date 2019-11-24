@@ -32,6 +32,48 @@ var squares = [];
 // this keeps track of the number of moves to enforce
 var turn = 0;
 
+// make maps for to number spaces to automate which pieces get placed
+var cols = new Map([
+  [20, "a"],
+  [84, "b"],
+  [148, "c"],
+  [212, "d"],
+  [276, "e"],
+  [340, "f"],
+  [404, "e"],
+  [468, "h"]
+]);
+
+var rows = new Map([
+  [20, "8"],
+  [84, "7"],
+  [148, "6"],
+  [212, "5"],
+  [276, "4"],
+  [340, "3"],
+  [404, "2"],
+  [468, "1"]
+]);
+
+var sources = new Map([
+  ["a1", "pieces/white/whiteRook.png"],
+  ["b1", "pieces/white/whiteKnight.png"],
+  ["c1", "pieces/white/whiteBishop.png"],
+  ["d1", "pieces/white/whiteQueen.png"],
+  ["e1", "pieces/white/whiteKing.png"],
+  ["f1", "pieces/white/whiteBishop.png"],
+  ["g1", "pieces/white/whiteKnight.png"],
+  ["h1", "pieces/white/whiteRook.png"],
+  ["a2", "pieces/white/whitePawn.png"],
+  ["b2", "pieces/white/whitePawn.png"],
+  ["c2", "pieces/white/whitePawn.png"],
+  ["d2", "pieces/white/whitePawn.png"],
+  ["e2", "pieces/white/whitePawn.png"],
+  ["f2", "pieces/white/whitePawn.png"],
+  ["g2", "pieces/white/whitePawn.png"],
+  ["h2", "pieces/white/whitePawn.png"]
+]);
+
 // -----------------------------------------------------------------------------
 // -------------------------- CANVAS EVENT HANDLER -----------------------------
 // -----------------------------------------------------------------------------
@@ -89,7 +131,7 @@ class Space {
     ctx.fillStyle = color;
     ctx.fill();
     ctx.closePath();
-    placePieces(this.x, this.y, this);
+    placePiece(this.x, this.y, this);
   }
 }
 
@@ -142,23 +184,32 @@ QUEEN   x1 --
 */
 
 // place all the pieces on the board
-function placePieces(x, y, space) {
+function placePiece(x, y, space) {
   // get the container for the image
   var container = document.getElementById("image-container");
 
   // make a new div for the image, oh boy this is gonna get complicated...
   var imgDiv = document.createElement("DIV");
   imgDiv.style.position = "absolute";
+
+  /*
+  big thanks to harshitpthk on StackOverflow for answering a similar question
+  https://stackoverflow.com/questions/32516488/set-position-of-div-dynamically
+  */
   imgDiv.style.top = y.toString() + "px";
   imgDiv.style.left = x.toString() + "px";
 
-  console.log(imgDiv.style.left);
-
   // make an element for the image
   var img = document.createElement("IMG");
-  img.src = "pieces/white/whiteBishop.png"; // set the source
   img.width = sideLength; // set the width
   img.height = sideLength; // set the height
+
+  // get the source for the image
+  var spaceName = cols.get(x) + rows.get(y);
+  var pieceSource = sources.get(spaceName);
+
+  // set the source for the image
+  if (pieceSource) img.src = pieceSource;
 
   // add the image to its div
   imgDiv.appendChild(img);
