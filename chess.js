@@ -56,6 +56,7 @@ var rows = new Map([
 ]);
 
 var sources = new Map([
+  // white pieces
   ["a1", "pieces/white/whiteRook.png"],
   ["b1", "pieces/white/whiteKnight.png"],
   ["c1", "pieces/white/whiteBishop.png"],
@@ -71,7 +72,24 @@ var sources = new Map([
   ["e2", "pieces/white/whitePawn.png"],
   ["f2", "pieces/white/whitePawn.png"],
   ["g2", "pieces/white/whitePawn.png"],
-  ["h2", "pieces/white/whitePawn.png"]
+  ["h2", "pieces/white/whitePawn.png"],
+  // black pieces
+  ["a8", "pieces/black/blackRook.png"],
+  ["b8", "pieces/black/blackKnight.png"],
+  ["c8", "pieces/black/blackBishop.png"],
+  ["d8", "pieces/black/blackKing.png"],
+  ["e8", "pieces/black/blackQueen.png"],
+  ["f8", "pieces/black/blackBishop.png"],
+  ["g8", "pieces/black/blackKnight.png"],
+  ["h8", "pieces/black/blackRook.png"],
+  ["a7", "pieces/black/blackPawn.png"],
+  ["b7", "pieces/black/blackPawn.png"],
+  ["c7", "pieces/black/blackPawn.png"],
+  ["d7", "pieces/black/blackPawn.png"],
+  ["e7", "pieces/black/blackPawn.png"],
+  ["f7", "pieces/black/blackPawn.png"],
+  ["g7", "pieces/black/blackPawn.png"],
+  ["h7", "pieces/black/blackPawn.png"]
 ]);
 
 // -----------------------------------------------------------------------------
