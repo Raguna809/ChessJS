@@ -89,6 +89,7 @@ class Space {
     ctx.fillStyle = color;
     ctx.fill();
     ctx.closePath();
+    placePieces();
   }
 }
 
@@ -141,13 +142,14 @@ QUEEN   x1 --
 */
 
 // place all the pieces on the board
-// code blatantly copied from stackoverflow
 function placePieces() {
-  var img = document.createElement("img");
-  img.src = "http://www.google.com/intl/en_com/images/logo_plain.png";
+  var img = document.createElement("IMG");
+  img.src = "pieces/white/whiteBishop.png";
+  img.position = "relative";
 
-  var src = document.getElementById("header");
-  src.appendChild(img);
+  var imgDiv = document.getElementById("image-container");
+
+  imgDiv.appendChild(img);
 }
 
 // -----------------------------------------------------------------------------
