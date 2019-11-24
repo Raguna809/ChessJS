@@ -149,10 +149,10 @@ function placePieces(x, y, space) {
   // make a new div for the image, oh boy this is gonna get complicated...
   var imgDiv = document.createElement("DIV");
   imgDiv.style.position = "absolute";
-  imgDiv.style.top = y.toString();
-  imgDiv.style.left = x.toString();
+  imgDiv.style.top = y.toString() + "px";
+  imgDiv.style.left = x.toString() + "px";
 
-  console.log(x.toString() + ", " + y.toString());
+  console.log(imgDiv.style.left);
 
   // make an element for the image
   var img = document.createElement("IMG");
