@@ -163,15 +163,14 @@ class Space {
 //       hex colors is to provide colors that will allow the pieces to be seen
 function makeRow(x, y) {
   // set color of the first square in the row
-  var color = (y - buffer) % (2 * sideLength) == 0 ? "#CCCCCB" : "#000022";
-
+  var color = (y - buffer) % (2 * sideLength) == 0 ? "#CCCCCB" : "#555577";
   var row = [];
 
   // draw 8 squares, alternating the color each time
   for (x = buffer; x < boardLength - buffer; x += sideLength) {
     row.push(new Space(x, y));
     row[row.length - 1].drawSquare(color);
-    color = color == "#CCCCCB" ? "#000022" : "#CCCCCB";
+    color = color == "#CCCCCB" ? "#555577" : "#CCCCCB";
   }
 
   return row;
