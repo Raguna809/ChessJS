@@ -225,14 +225,16 @@ function placePiece(x, y, space) {
   var spaceName = cols.get(x) + rows.get(y);
   var pieceSource = sources.get(spaceName);
 
-  // set the source for the image
-  if (pieceSource) img.src = pieceSource;
+  // set the source for the image only if the piece is valid
+  if (pieceSource) {
+    img.src = pieceSource;
 
-  // add the image to its div
-  imgDiv.appendChild(img);
+    // add the image to its div
+    imgDiv.appendChild(img);
 
-  // add the new div to the screen
-  container.appendChild(imgDiv);
+    // add the new div to the screen
+    container.appendChild(imgDiv);
+  }
 }
 
 // -----------------------------------------------------------------------------
