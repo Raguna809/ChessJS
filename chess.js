@@ -32,7 +32,7 @@ var squares = [];
 // this keeps track of the number of moves to enforce
 var turn = 0;
 
-// make maps for to number spaces to automate which pieces get placed
+// map pixel number to letter of column on board
 var cols = new Map([
   [20, "a"],
   [84, "b"],
@@ -44,6 +44,7 @@ var cols = new Map([
   [468, "h"]
 ]);
 
+// map pixel number to number of row on board
 var rows = new Map([
   [20, "8"],
   [84, "7"],
@@ -55,6 +56,7 @@ var rows = new Map([
   [468, "1"]
 ]);
 
+// map square names to piece image sources
 var sources = new Map([
   // white pieces
   ["a1", "pieces/white/whiteRook.png"],
@@ -92,6 +94,12 @@ var sources = new Map([
   ["h7", "pieces/black/blackPawn.png"]
 ]);
 
+// the currently selected piece
+var currentPiece = null;
+
+// the target space for piece movement
+var targetSpace = null;
+
 // -----------------------------------------------------------------------------
 // -------------------------- CANVAS EVENT HANDLER -----------------------------
 // -----------------------------------------------------------------------------
@@ -123,11 +131,57 @@ function determine_square(event) {
 
 // perform some action depending on which square was clicked
 function canvas_events(event) {
+  // get the piece that has been clicked
   var clicked = determine_square(event);
-
-  // this is all test code right now
   clicked = squares[clicked[0]][clicked[1]];
-  clicked.drawSquare("#FF0000");
+
+  // see if we need a space or a piece
+  // if there is a current piece we need a space
+  if (currentPiece) {
+    console.log("setting target");
+    targetSpace = clicked;
+    return;
+  }
+
+  console.log("setting piece");
+
+  // since we need a piece ...
+  // get the clicked piece
+  let p = clicked.piece;
+
+  // if there was no piece do nothing
+  if (!p) return;
+
+  // check if the word "white" if found in the source path for the piece
+  // USE A REGEX
+
+  // if the word "white" is found and the player is white set the current piece
+
+  // if the word "white" is found and the player is not white do nothing
+
+  // if the word "white" not is found and the player is not white set the
+  // current piece
+
+  // if the word "white" is found and the player is white do nothing
+
+  currentPiece = p;
+}
+
+// -----------------------------------------------------------------------------
+// ------------------------------ PLAYER CLASS ---------------------------------
+// -----------------------------------------------------------------------------
+
+class Player {
+  // make the player
+  constructor(number) {
+    // so we know which player wins at the end of the game
+    this.number = number;
+  }
+
+  // determine whether the player has a king
+  hasKing() {
+    return true;
+  }
 }
 
 // -----------------------------------------------------------------------------
@@ -150,6 +204,23 @@ class Space {
     ctx.fill();
     ctx.closePath();
     placePiece(this.x, this.y, this);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// ------------------------------- PIECE CLASS ---------------------------------
+// -----------------------------------------------------------------------------
+
+class Piece {
+  // make the piece
+  constructor(img, div, space) {
+    // the image associated with the piece
+    this.img = img;
+
+    // the html div associated with the image
+    this.div = div;
+
+    this.space = space;
   }
 }
 
@@ -235,14 +306,80 @@ function placePiece(x, y, space) {
     // add the new div to the screen
     container.appendChild(imgDiv);
   }
+
+  // add the image to the board
+  space.piece = new Piece(img, imgDiv, space);
+
+  // pass the event handler of the canvas to the images
+  this.addEventListener("click", canvas_events, false);
+}
+
+// -----------------------------------------------------------------------------
+// ------------------------------- GAME CLASS ----------------------------------
+// -----------------------------------------------------------------------------
+
+class Game {
+  // make the game
+  constructor() {
+    // make an array to hold the players so we can easily track which player is
+    // allowed to interact with the board. this isn't super important, but in
+    // this implementation, the player at index 0 is player 2 and the player at
+    // index 1 is player 1. this just makes it easier to keep track of with the
+    // turn counter
+    this.players = [new Player(2), new Player(1)];
+
+    // reset the number of turns that have passed
+    turn = 0;
+
+    // generate all of the spaces and add all of the images
+    makeBoard();
+
+    // pass the function canvas_events as a parameter which will automatically
+    // be passed the event as a parameter when called
+    board.addEventListener("click", canvas_events, false);
+  }
+
+  // move the selected piece to the target space
+  movePiece() {
+    console.log("moving");
+    // remove the old space's ownership of the piece
+    currentPiece.space.piece = null;
+
+    // move the piece graphic
+    currentPiece.div.style.top = targetSpace.y.toString() + "px";
+    currentPiece.div.style.left = targetSpace.x.toString() + "px";
+
+    // if the space had a piece, remove the piece from the board
+
+    // give the piece to the space
+    targetSpace.piece = currentPiece;
+
+    // clear the current piece and the target space
+    currentPiece = null;
+    targetSpace = null;
+  }
+
+  // play a single turn
+  playTurn() {
+    console.log(turn);
+    // increment the turn counter
+    turn++;
+
+    // wait until a valid piece has been selected
+    while (!currentPiece && !targetSpace);
+
+    this.movePiece();
+  }
 }
 
 // -----------------------------------------------------------------------------
 // -------------------------------- RUN CODE -----------------------------------
 // -----------------------------------------------------------------------------
 
-makeBoard();
+// setup the game
+game = new Game();
 
-// pass the function canvas_events as a parameter which will automatically be
-// passed the event as a parameter when called
-board.addEventListener("click", canvas_events, false);
+// wait until a valid piece has been selected
+// while (!currentPiece && !targetSpace);
+
+game.movePiece();

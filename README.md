@@ -1,4 +1,4 @@
-# ChessJS
+# CheJS
 
 ### About this project
 
@@ -26,7 +26,6 @@ what you did and how it worked.
 
 ##### Immediate goals
 
-- add event handlers to the pieces
 - make the pieces move
 - restrict the movement of the pieces
 - allow pieces to "capture" other pieces, thus removing pieces from the board
