@@ -138,14 +138,18 @@ function canvas_events(event) {
   clicked = squares[clicked[0]][clicked[1]];
 
   // see if we need a space or a piece
-  // if there is a current piece we need a space
+  // if there is a current piece we need a space then we can play the turn
   if (currentPiece) {
-    console.log("setting target", clicked.x, clicked.y);
     // set the target space
     targetSpace = clicked;
 
     // start the turn
     game.playTurn();
+
+    // clear the current piece and the target space
+    console.log("clearing pieces");
+    currentPiece = null;
+    targetSpace = null;
 
     // escape the event handler
     return;
@@ -157,8 +161,6 @@ function canvas_events(event) {
 
   // if there was no piece do nothing
   if (!p) return;
-
-  console.log("setting piece", p.img.src);
 
   // check if the word "white" if found in the source path for the piece
   // USE A REGEX
@@ -172,6 +174,7 @@ function canvas_events(event) {
 
   // if the word "white" is found and the player is white do nothing
 
+  console.log("setting piece", p.img.src);
   currentPiece = p;
 }
 
@@ -320,7 +323,7 @@ function placePiece(x, y, space) {
   space.piece = new Piece(img, imgDiv, space);
 
   // pass the event handler of the canvas to the images
-  this.addEventListener("click", canvas_events, false);
+  this.addEventListener("mouseup", canvas_events);
 }
 
 // -----------------------------------------------------------------------------
@@ -345,14 +348,11 @@ class Game {
 
     // pass the function canvas_events as a parameter which will automatically
     // be passed the event as a parameter when called
-    board.addEventListener("click", canvas_events, false);
+    board.addEventListener("mouseup", canvas_events);
   }
 
   // move the selected piece to the target space
   movePiece() {
-    // return if we don't have both a piece and a space
-    if (!currentPiece || !targetSpace) return;
-
     console.log("moving");
     // remove the old space's ownership of the piece
     currentPiece.space.piece = null;
@@ -365,10 +365,6 @@ class Game {
 
     // give the piece to the space
     targetSpace.piece = currentPiece;
-
-    // clear the current piece and the target space
-    currentPiece = null;
-    targetSpace = null;
   }
 
   // play a single turn
