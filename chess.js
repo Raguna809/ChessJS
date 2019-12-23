@@ -40,7 +40,7 @@ var cols = new Map([
   [212, "d"],
   [276, "e"],
   [340, "f"],
-  [404, "e"],
+  [404, "g"],
   [468, "h"]
 ]);
 
@@ -99,6 +99,8 @@ var currentPiece = null;
 
 // the target space for piece movement
 var targetSpace = null;
+
+var game;
 
 // -----------------------------------------------------------------------------
 // -------------------------- CANVAS EVENT HANDLER -----------------------------
@@ -165,6 +167,8 @@ function canvas_events(event) {
   // if the word "white" is found and the player is white do nothing
 
   currentPiece = p;
+
+  game.playTurn();
 }
 
 // -----------------------------------------------------------------------------
@@ -220,6 +224,7 @@ class Piece {
     // the html div associated with the image
     this.div = div;
 
+    // the space the piece is on
     this.space = space;
   }
 }
@@ -296,6 +301,8 @@ function placePiece(x, y, space) {
   var spaceName = cols.get(x) + rows.get(y);
   var pieceSource = sources.get(spaceName);
 
+  console.log(spaceName, pieceSource);
+
   // set the source for the image only if the piece is valid
   if (pieceSource) {
     img.src = pieceSource;
@@ -341,6 +348,9 @@ class Game {
 
   // move the selected piece to the target space
   movePiece() {
+    // return if we don't have both a piece and a space
+    if (!currentPiece || !targetSpace) return;
+
     console.log("moving");
     // remove the old space's ownership of the piece
     currentPiece.space.piece = null;
@@ -365,9 +375,6 @@ class Game {
     // increment the turn counter
     turn++;
 
-    // wait until a valid piece has been selected
-    while (!currentPiece && !targetSpace);
-
     this.movePiece();
   }
 }
@@ -378,8 +385,3 @@ class Game {
 
 // setup the game
 game = new Game();
-
-// wait until a valid piece has been selected
-// while (!currentPiece && !targetSpace);
-
-game.movePiece();
