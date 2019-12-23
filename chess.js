@@ -140,12 +140,16 @@ function canvas_events(event) {
   // see if we need a space or a piece
   // if there is a current piece we need a space
   if (currentPiece) {
-    console.log("setting target");
+    console.log("setting target", clicked.x, clicked.y);
+    // set the target space
     targetSpace = clicked;
+
+    // start the turn
+    game.playTurn();
+
+    // escape the event handler
     return;
   }
-
-  console.log("setting piece");
 
   // since we need a piece ...
   // get the clicked piece
@@ -153,6 +157,8 @@ function canvas_events(event) {
 
   // if there was no piece do nothing
   if (!p) return;
+
+  console.log("setting piece", p.img.src);
 
   // check if the word "white" if found in the source path for the piece
   // USE A REGEX
@@ -167,8 +173,6 @@ function canvas_events(event) {
   // if the word "white" is found and the player is white do nothing
 
   currentPiece = p;
-
-  game.playTurn();
 }
 
 // -----------------------------------------------------------------------------
@@ -300,8 +304,6 @@ function placePiece(x, y, space) {
   // get the source for the image
   var spaceName = cols.get(x) + rows.get(y);
   var pieceSource = sources.get(spaceName);
-
-  console.log(spaceName, pieceSource);
 
   // set the source for the image only if the piece is valid
   if (pieceSource) {
